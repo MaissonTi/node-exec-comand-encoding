@@ -3,6 +3,7 @@ const fs = require('fs');
 const exec = require('child_process').exec;
 
 const detectCharacterEncoding = require('detect-character-encoding');
+const ProgressBar = require('ascii-progress');
 
 function is_dir(path) {
     try {
@@ -19,7 +20,7 @@ function is_dir(path) {
 
     let locate = path.resolve( __dirname, '..' );
 
-    let cmd = `find ${locate}/project_files/ -type f -name "*.php" -o -name "*.js" > ${locate}/node-exec-comand-encoding/search.txt`;
+    let cmd = `find ${locate}/{PROJETO_FILES}/ -type f -name "*.php" -o -name "*.js" > ${locate}/node-exec-comand-encoding/search.txt`;
 
      exec(cmd, function() {    
       
@@ -29,6 +30,11 @@ function is_dir(path) {
             
             let texto = content.split('\n');
     
+            var bar = new ProgressBar({ 
+                schema: 'Progress: :current :bar Total files: :total', 
+                total : texto.length 
+            });
+
             texto.forEach( function(line){
     
                 let isDir = is_dir(line);   
@@ -40,13 +46,15 @@ function is_dir(path) {
                         let fileBuffer =  fs.readFileSync(line);                    
                         let charsetMatch =  detectCharacterEncoding(fileBuffer);
                                             
-                        result.push( 'FILE:' + line + ' ECODING: ' + charsetMatch.encoding )                        
+                        result.push( 'FILE:' + line + ' ECODING: ' + charsetMatch.encoding );                        
                         
                     } catch (error) {                        
-                        result.push( 'ERRO FILE:' + line )                        
+                        result.push( 'ERRO FILE:' + line );                      
                     }
                     
                 } 
+
+                bar.update();
     
             })
     

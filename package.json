@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ascii-progress": "^1.0.5",
     "detect-character-encoding": "^0.8.0",
-    "mime": "^2.4.4",
-    "sharp": "^0.23.0"
+    "mime": "^2.4.4"
   }
 }
