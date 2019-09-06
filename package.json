@@ -1,0 +1,17 @@
+{
+  "name": "Node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "detect-character-encoding": "^0.8.0",
+    "mime": "^2.4.4",
+    "sharp": "^0.23.0"
+  }
+}
